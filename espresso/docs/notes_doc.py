@@ -4,6 +4,7 @@ from faker import Faker
 from mdgen import MarkdownPostProvider
 import uuid
 import random
+import time
 
 class NotesDocument:
     class Content(list):
@@ -29,7 +30,7 @@ class NotesDocument:
         self.documentID: str = values.get("documentID", None)
         self.title: str = values.get("title", None)
         self.author: str = values.get("author", None)
-        self.lastModified: int = values.get("lastModified", None)
+        self.lastModified: int = values.get("lastModified", None) if 'lastModified' in values else time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.localtime())
         self.content: List[Items] = self.Content(values=values.get("content"))
 
     def reprJson(self):
@@ -43,6 +44,7 @@ class NotesDocument:
     def load_from_file(self, file_path):
         with open(file_path, 'r') as file:
             source = json.loads(file)
+        return source
 
     @staticmethod
     def gen_random_data():

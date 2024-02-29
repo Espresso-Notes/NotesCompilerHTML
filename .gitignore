@@ -160,6 +160,4 @@ cython_debug/
 #.idea/
 
 # Test Data
-test/*.txt
-test/*.json
-test/*.html
+tests/

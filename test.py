@@ -1,11 +1,13 @@
 import os
 import json
 import time
+import logging
 from pathlib import Path
 from espresso.utils.directory_utils import setup_output_directory
 from espresso.docs.notes_doc import NotesDocument
 from espresso.compiler import NotesCompiler
-import logging
+from espresso.utils.static_files import StaticFilesUtil
+
 
 def main():
     # Set the current working directory to the notebook
@@ -46,18 +48,11 @@ def setup_environment(base_path = Path('.')) -> None:
     static_dir = base_path / 'static'
     if not static_dir.is_dir():
         static_dir.mkdir()
-    
-    # Setup the CSS Directory
-    css_dir = static_dir / 'css'
-    if not css_dir.is_dir():
-        css_dir.mkdir()
-
-    # Setup the Templates Directory
-    templates_dir = static_dir / 'templates'
-    if not templates_dir.is_dir():
-        templates_dir.mkdir()
 
     # TODO: Download Default Files from the Website
+    util = StaticFilesUtil()
+    util.get_manifest()
+    util.download_files(static_dir)
 
     # Setup the Output Directories
     setup_output_directory(base_path)

@@ -10,7 +10,7 @@ class NotesCompiler:
 
     def __init__(self, base_path : Path):
         self.notes_path : Path = base_path / 'notes'
-        self.templates_path : Path = base_path / 'static' / 'templates'
+        self.templates_path : Path = base_path / 'static' / 'html' / 'templates'
         self.out_path = base_path / 'out' / 'html'
         self.notes_files = [x for x in self.notes_path.iterdir() if x.is_file()]
         self.jinja_env = Environment(loader=FileSystemLoader(self.templates_path))
@@ -19,7 +19,7 @@ class NotesCompiler:
         logging.info('Starting compilation of notes files.')
         for file in self.notes_files:
             # Load the Notes Data
-            out_file = self.out_path / f'{file.name.split('.')[0]}.html'
+            out_file = self.out_path / f'{file.name.split(".")[0]}.html'
             notes_json = json.loads(file.read_text())
             notes_data = NotesDocument(notes_json)
 

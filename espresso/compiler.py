@@ -48,7 +48,7 @@ class NotesCompiler:
                 content_blocks.append(markdown.markdown(block.text))
             elif block.blockType == 'code':
                 lexer = get_lexer_by_name(block.language)
-                formatter = HtmlFormatter()
+                formatter = HtmlFormatter(linenos='inline')
                 result = highlight(block.code, lexer, formatter)
                 content_blocks.append(result)
             elif block.blockType == 'latex':

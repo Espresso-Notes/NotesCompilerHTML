@@ -2,6 +2,8 @@
 
 This is the Notes Compiler for the Espresso Notes project.
 
+Install dependencies using `pip install -r requirements.txt`.
+
 To compile the project into an executable, utilize the [PyInstaller](https://pyinstaller.org/en/stable/) lib. Then simply call it:
 
 `pyinstaller .\compiler.py`

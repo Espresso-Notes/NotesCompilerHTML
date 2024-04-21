@@ -21,10 +21,11 @@ class ProjectSerializer:
 
     def load_from_file(self, file_path: Path) -> EspressoProject:
         json_data = json.loads(file_path.read_text())
-        project = EspressoProject()
-        project.title = json_data['title']
-        project.description = json_data['description']
-        project.authors = json_data['authors']
+        project = EspressoProject(
+            json_data['title'],
+            json_data['description'],
+            json_data['authors']
+        )
         return project
     
 
